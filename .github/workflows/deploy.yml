@@ -67,6 +67,11 @@ jobs:
           echo "$HOME/terminus/bin" >> "$GITHUB_PATH"
 
       - name: Clear Pantheon environment cache
+        env:
+          # The installer.phar release pins an older Terminus that refuses to
+          # run on the runner's default PHP (8.2+); this is Terminus's own
+          # documented escape hatch, not a real compatibility risk here.
+          TERMINUS_ALLOW_UNSUPPORTED_NEWER_PHP: "1"
         run: |
           terminus auth:login --machine-token="${{ secrets.PANTHEON_MACHINE_TOKEN }}"
           terminus env:clear-cache "${PANTHEON_SITE}.${PANTHEON_ENV}"
