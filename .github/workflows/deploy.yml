@@ -31,8 +31,8 @@ jobs:
 
       - name: Sanity-check recipe files are present
         run: |
-          test -f recipes/daedalus_recipe/recipe.yml
-          test -f recipes/daedalus_recipe/ai/recipe.yml
+          test -f daedalus_recipe_source/daedalus_recipe/recipe.yml
+          test -f daedalus_recipe_source/daedalus_recipe/ai/recipe.yml
 
   deploy:
     needs: build-and-validate
