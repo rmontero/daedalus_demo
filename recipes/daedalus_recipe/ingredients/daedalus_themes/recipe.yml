@@ -1,0 +1,27 @@
+name: 'Daedalus Themes'
+description: 'Sets Claro as the administration theme and the Daedalus reference theme as the default front-end theme.'
+type: 'Site'
+
+recipes:
+  - core/recipes/core_recommended_admin_theme
+
+install:
+  - daedalus_theme
+  # daedalus_theme ships region block placements (content, messages,
+  # local tasks, admin actions) in config/optional, owned by block.
+  - block
+
+# RecipeRunner::installTheme() installs themes with config syncing on,
+# which skips config entity creation, so the placements never land at
+# install; the import creates the missing ones. Non-strict: a placement
+# is the site's to move or remove, and a saved block placement does not
+# round-trip the shipped YAML verbatim anyway, so re-applying must not
+# compare it.
+config:
+  strict: false
+  import:
+    daedalus_theme: '*'
+  actions:
+    system.theme:
+      simpleConfigUpdate:
+        default: daedalus_theme

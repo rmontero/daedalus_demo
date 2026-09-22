@@ -1,0 +1,30 @@
+name: 'Daedalus AI: Gemini (image generation)'
+description: 'Adds the Google Gemini provider and sets it as the default text-to-image provider, enabling AI image generation in the page builder. Image generation ships OFF: paste your Gemini API key at /admin/config/system/keys (key id: gemini), then enable "Generate images" in the Daedalus AI settings.'
+type: 'Site'
+
+# Depends on the AI core ingredient, which installs the `ai` module and the
+# assistant this provider serves. Declaring it satisfies recipe validation (the
+# ai.settings config action below targets a module the core ingredient installs)
+# and lets this provider be applied on its own, not only via the umbrella.
+recipes:
+  - daedalus_ai
+
+install:
+  - gemini_provider
+  # Gemini sizes images by aspect ratio under its own camelCase `aspectRatio`
+  # key; this submodule teaches the AI image-generation tool Gemini's vocabulary.
+  - daedalus_ai_gemini
+
+config:
+  strict: false
+  import:
+    gemini_provider: '*'
+  actions:
+    gemini_provider.settings:
+      simpleConfigUpdate:
+        api_key: gemini
+    ai.settings:
+      simpleConfigUpdate:
+        default_providers.text_to_image:
+          provider_id: gemini
+          model_id: models/gemini-3-pro-image

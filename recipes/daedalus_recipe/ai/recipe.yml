@@ -1,0 +1,29 @@
+name: 'Daedalus AI'
+description: 'Installs the complete Daedalus page builder plus the AI editing assistant: Daedalus Blueprint, the Daedalus AI in-page assistant, agent memory, the Anthropic (chat) provider, and the Google Gemini (image generation) provider. Add your API keys at /admin/config/system/keys to activate.'
+type: 'Site'
+
+recipes:
+  # The full Daedalus page builder (modules, block types, page content type,
+  # demo content): the base site recipe at this package's root. Resolved from
+  # web/ via ../recipes (recipes/ lives at the project root); drupal/daedalus_recipe
+  # installs at recipes/daedalus_recipe.
+  - ../recipes/daedalus_recipe
+  # Provider-neutral AI core (agent + assistant + module stack).
+  - ../recipes/daedalus_recipe/ingredients/daedalus_ai
+  # Provider layers (each ships an empty key; paste yours to activate).
+  - ../recipes/daedalus_recipe/ingredients/daedalus_ai_anthropic
+  - ../recipes/daedalus_recipe/ingredients/daedalus_ai_gemini
+
+config:
+  strict: false
+  actions:
+    # The AI layer's permission enters the suite's shipped editor role
+    # here, at the umbrella: 'use ai assistant' only exists once the AI
+    # modules install, and the role only exists on a site carrying the
+    # full suite (the base recipe include above ships it; a composing
+    # recipe that picks individual ingredients and builds its own roles
+    # never sees this grant). A parent recipe's actions
+    # apply after its included recipes, so both exist by now.
+    user.role.daedalus_editor:
+      grantPermissions:
+        - 'use ai assistant'

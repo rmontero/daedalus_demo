@@ -1,0 +1,11 @@
+name: 'Daedalus'
+description: 'Installs the complete Daedalus page builder on a new site: the bundled umbrella at ingredients/daedalus (configuration only), then the starter header, footer, welcome page and demo media of ingredients/daedalus_demo_content. To apply a single component, point drush at it directly, e.g. recipes/daedalus_recipe/ingredients/daedalus_page.'
+type: 'Site'
+
+recipes:
+  - '../recipes/daedalus_recipe/ingredients/daedalus'
+  # The starter content last, after the umbrella's roles: it ships no bundle
+  # a permission could name, and this is the order the retry-safety test
+  # applies. An existing site that wants only the configuration applies the
+  # umbrella directly.
+  - '../recipes/daedalus_recipe/ingredients/daedalus_demo_content'

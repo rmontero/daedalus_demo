@@ -1,0 +1,16 @@
+name: 'Daedalus Front Page'
+description: 'Ships a ready-to-edit welcome page built with the page builder, a Home link in the main menu, and points the site front page at the page.'
+type: 'Site'
+
+# The node lives in the nested front_page_content sub-ingredient for the
+# same ordering reason as the header and footer blocks: a recipe applies
+# its config before its own content, but sub-recipes apply completely
+# first, so the /welcome alias exists by the time page.front points at it.
+recipes:
+  - ../recipes/daedalus_recipe/ingredients/daedalus_front_page/front_page_content
+
+config:
+  actions:
+    system.site:
+      simpleConfigUpdate:
+        page.front: /welcome

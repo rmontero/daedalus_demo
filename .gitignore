@@ -1,0 +1,27 @@
+# Composer-managed dependencies, rebuilt by `composer install`.
+/vendor/
+/web/core/
+/web/libraries/
+/web/modules/contrib/
+/web/profiles/contrib/
+/web/themes/contrib/
+/drush/Commands/contrib/
+
+# Local/sensitive overrides.
+/web/sites/*/settings.local.php
+/web/sites/*/services.local.yml
+/.env
+
+# User-generated content.
+/web/sites/*/files
+/web/sites/*/private
+
+# SimpleTest multi-site environment.
+/web/sites/simpletest
+
+# Editor/IDE cruft.
+.idea
+.DS_Store
+
+# DDEV internal state (see .ddev/.gitignore for the full list; ddev config.yaml itself is tracked).
+.ddev/db_snapshots

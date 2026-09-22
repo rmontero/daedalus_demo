@@ -1,0 +1,26 @@
+name: 'Daedalus Engine'
+description: 'Installs the Daedalus page-building engine: daedalus_ui, daedalus_edit, daedalus_layout, and their supporting modules. These five always travel together.'
+type: 'Site'
+
+install:
+  # Core modules
+  - path
+  # Contrib modules
+  - daedalus_tempstore
+  - daedalus_ui
+  - twig_events
+  - daedalus_edit
+  - daedalus_layout
+
+config:
+  strict: true
+  import:
+    # Core modules
+    layout_discovery: '*'
+    layout_builder: '*'
+    # Contrib modules
+    daedalus_tempstore: '*'
+    daedalus_ui: '*'
+    twig_events: '*'
+    daedalus_edit: '*'
+    daedalus_layout: '*'

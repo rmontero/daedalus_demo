@@ -1,0 +1,18 @@
+name: 'Daedalus Blueprint'
+description: 'Installs daedalus_blueprint — entity serialization for AI consumption and targeted CRUD — with its API and stencil submodules.'
+type: 'Site'
+
+install:
+  - daedalus_blueprint
+  - daedalus_blueprint_api
+  - daedalus_blueprint_stencil
+
+config:
+  # Not strict: daedalus_blueprint's only install config is
+  # daedalus_blueprint.settings, whose active_design_system pointer composing
+  # recipes set in their actions (the styling ingredient activates olivero),
+  # so a strict equality check refuses every re-apply on a converged site.
+  # The import stays so the settings object exists for those actions.
+  strict: false
+  import:
+    daedalus_blueprint: '*'

@@ -1,0 +1,146 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: a40184f5-f69e-414d-a430-919262beeda2
+  bundle: layout_block
+  default_langcode: en
+  depends:
+    99fe6048-1025-4c28-a643-e293ddb80a50: block_content
+    86c96a98-f955-461a-b908-15feeb9927ec: block_content
+    ca16c3ef-e835-4cd1-825e-4e9c0d6409ee: block_content
+    42ed7027-6fba-4634-a304-84b4ab0957df: block_content
+default:
+  revision_user:
+    - target_id: 1
+  status:
+    - value: true
+  info:
+    - value: Footer
+  reusable:
+    - value: true
+  revision_translation_affected:
+    - value: true
+  layout_builder__layout:
+    - section:
+        layout_id: daedalus_stylish_container
+        layout_settings:
+          label: 'Three column'
+        components:
+          77950cbd-d062-4b7d-ac7e-75d7661d88e2:
+            uuid: 77950cbd-d062-4b7d-ac7e-75d7661d88e2
+            region: content
+            configuration:
+              id: daedalus_layout_section
+              label_display: '0'
+              section:
+                layout_id: daedalus_stylish_container
+                layout_settings:
+                  label: 'Daedalus'
+                components:
+                  aadf9a28-f51b-4061-b97c-8366857652ad:
+                    uuid: aadf9a28-f51b-4061-b97c-8366857652ad
+                    region: content
+                    configuration:
+                      id: 'inline_block:text'
+                      label: Text
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: 99fe6048-1025-4c28-a643-e293ddb80a50
+                    weight: 0
+                    additional: {}
+                third_party_settings:
+                  daedalus_layout:
+                    uuid: 77950cbd-d062-4b7d-ac7e-75d7661d88e2
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 0
+            additional: {}
+          b375e808-8c84-43e1-9544-b4d885074754:
+            uuid: b375e808-8c84-43e1-9544-b4d885074754
+            region: content
+            configuration:
+              id: daedalus_layout_section
+              label_display: '0'
+              section:
+                layout_id: daedalus_stylish_container
+                layout_settings:
+                  label: 'Much Surprise'
+                components:
+                  ed0d0756-a757-4fb3-9d8b-b63e3debaa1b:
+                    uuid: ed0d0756-a757-4fb3-9d8b-b63e3debaa1b
+                    region: content
+                    configuration:
+                      id: 'inline_block:text'
+                      label: Text
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: 86c96a98-f955-461a-b908-15feeb9927ec
+                    weight: 0
+                    additional: {}
+                third_party_settings:
+                  daedalus_layout:
+                    uuid: b375e808-8c84-43e1-9544-b4d885074754
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 3
+            additional: {}
+          b7b57a65-14e9-4d5b-b9fe-393fd7f6a030:
+            uuid: b7b57a65-14e9-4d5b-b9fe-393fd7f6a030
+            region: content
+            configuration:
+              id: daedalus_layout_section
+              label_display: '0'
+              section:
+                layout_id: daedalus_stylish_container
+                layout_settings:
+                  label: 'Navigation instructions'
+                components:
+                  2bb39260-2512-446b-b9eb-9cbed3c89bdd:
+                    uuid: 2bb39260-2512-446b-b9eb-9cbed3c89bdd
+                    region: content
+                    configuration:
+                      id: 'inline_block:formatted_text'
+                      label: 'Formatted text'
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: ca16c3ef-e835-4cd1-825e-4e9c0d6409ee
+                    weight: 1
+                    additional: {}
+                third_party_settings:
+                  daedalus_layout:
+                    uuid: b7b57a65-14e9-4d5b-b9fe-393fd7f6a030
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 4
+            additional: {}
+        third_party_settings:
+          daedalus_layout:
+            uuid: daf77911-bd91-4bea-b9df-ea280d5ad419
+    - section:
+        layout_id: daedalus_stylish_container
+        layout_settings:
+          label: 'Pro tip'
+        components:
+          1832e9b4-502a-4711-a5df-4c62de02d13f:
+            uuid: 1832e9b4-502a-4711-a5df-4c62de02d13f
+            region: content
+            configuration:
+              id: 'inline_block:text'
+              label: Text
+              label_display: '0'
+              provider: layout_builder
+              view_mode: default
+              block_uuid: 42ed7027-6fba-4634-a304-84b4ab0957df
+            weight: 0
+            additional: {}
+        third_party_settings:
+          daedalus_layout:
+            uuid: 01c25804-fdbf-4b66-8988-cb06d37b3c5d
+  daedalus_stylish_styles:
+    - value: '{"container:120e51eb-0168-45ba-bd97-2bc93633a7d3":{"variants":[{"variant":"container_lg","fragment":""}],"default":{"padding-top":"3rem","padding-bottom":"3rem","text-align":"center"}},"block:f8eef6ac-bcd2-4880-a585-4fbf876e1871":{"default":{"font-size":"0.875rem","margin-bottom":"0"}},"container:daf77911-bd91-4bea-b9df-ea280d5ad419":{"variants":[{"variant":"container_lg","fragment":""},{"variant":"row","fragment":""}],"default":{"align-items":"center","padding-top":"3rem","border-top-style":"solid","border-top-width":"1px","border-top-color":"var(--color-border)"}},"block:aadf9a28-f51b-4061-b97c-8366857652ad":{"default":{"font-size":"1.75rem","font-weight":"700","text-decoration-line":"none"}},"container:e23eacc2-41ba-45e3-abaa-d198aa084569":{"variants":[{"variant":"container_site","fragment":""}]},"container:61f7f8df-8448-4351-807d-78897bfff00e":{"variants":[{"variant":"container_site","fragment":""}],"default":{"display":"flex","gap":"0.5rem","background-color":"var(--color-accent)","width":"fit-content","padding-top":"18px","border-radius":"9999px"}},"block:a8dd59ca-6a7d-4860-98e8-bd2464cb94c5":{"default":{"width":"fit-content","background-color":"var(--color-accent-hover)","font-weight":"700","border-radius":"1rem","padding-inline":"0.25rem","padding-top":"5px","padding-bottom":"5px","padding-left":"10px","padding-right":"10px"}},"block:c6518328-1b04-4a3d-90dc-85e5d2fa33d3":{"default":{"line-height":"2","font-weight":"700","font-size":"1.3rem"}},"container:01c25804-fdbf-4b66-8988-cb06d37b3c5d":{"variants":[{"variant":"container_site","fragment":""}],"default":{"background-color":"var(--color-accent-hover)","margin-top":"2rem"}},"block:1832e9b4-502a-4711-a5df-4c62de02d13f":{"default":{"text-align":"center","color":"var(--color-bg)","font-size":"1rem","font-weight":"700"}}}'

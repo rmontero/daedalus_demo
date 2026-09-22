@@ -1,0 +1,11 @@
+name: 'Daedalus Sample Values'
+description: 'Installs field_sample_value so newly placed blocks arrive populated with sample content.'
+type: 'Site'
+
+install:
+  - field_sample_value
+
+config:
+  strict: true
+  import:
+    field_sample_value: '*'

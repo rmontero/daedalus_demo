@@ -1,0 +1,15 @@
+name: 'Daedalus Header Block Content'
+description: "The header block content: a layout block entity with a built section, imported from this ingredient's content/ directory. Nested inside daedalus_header_block so the content imports before the parent applies the region placement."
+type: 'Site'
+
+# The layout block type the header is an instance of, and the navigation
+# module whose main menu block the header places (daedalus_theme ships
+# the template and stylable anatomy for navigation_menu:*). Paths are
+# Drupal-root relative: recipe names containing a slash resolve from the
+# Drupal root, and a nested ingredient cannot use a bare name.
+recipes:
+  - ../recipes/daedalus_recipe/ingredients/daedalus_layout_block
+  - ../recipes/daedalus_recipe/ingredients/daedalus_navigation
+
+# Content import always skips existing entities, so a site that edited its
+# header is never clobbered on re-apply.

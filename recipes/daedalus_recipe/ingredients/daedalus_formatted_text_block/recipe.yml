@@ -1,0 +1,19 @@
+name: 'Daedalus Formatted Text Block'
+description: 'Adds the formatted (rich) text block type for Daedalus pages.'
+type: 'Block type'
+
+recipes:
+  # Precise dependencies, not the daedalus_base alias: the engine for the
+  # page-builder stack, sample values for the block type's field defaults.
+  # The block's text format (daedalus_edit_formatted_text) ships with the
+  # module itself, so no format ingredient is needed.
+  - daedalus_engine
+  - daedalus_sample_values
+
+install:
+  - daedalus_edit_formatted_text_block
+
+config:
+  strict: false
+  import:
+    daedalus_edit_formatted_text_block: '*'

@@ -1,0 +1,70 @@
+name: 'Daedalus AI'
+description: 'Installs the provider-neutral Daedalus AI editing layer: the JSON entity serialization layer (Daedalus Blueprint), the in-page AI assistant tool and chat sidebar (Daedalus AI), and cross-turn agent memory. No LLM provider is configured here — apply a provider layer such as Daedalus AI Anthropic, or configure your own, to make the assistant operational.'
+type: 'Site'
+
+install:
+  # AI framework (drupal/ai + ecosystem)
+  - ai
+  - ai_assistant_api
+  - ai_chatbot
+  - ai_agents
+  # Page-builder AI layer
+  - daedalus_blueprint
+  - daedalus_blueprint_ai
+  - daedalus_ai_memory
+  - daedalus_ai
+
+config:
+  strict: false
+  import:
+    # AI framework
+    ai: '*'
+    ai_assistant_api: '*'
+    ai_chatbot: '*'
+    # ai_agents ships example triage/config agents (content type, field,
+    # taxonomy) in config/install; a '*' import would land them on every
+    # site. Only the module's settings belong here. The one agent we ship,
+    # daedalus, comes from this recipe's config/ directory.
+    ai_agents:
+      - ai_agents.settings
+    # Page-builder AI layer
+    daedalus_blueprint: '*'
+    daedalus_blueprint_ai: '*'
+    daedalus_ai_memory: '*'
+    # daedalus_ai ships daedalus_ai.settings (config/install); the agent + assistant
+    # are provided by this recipe's config/ directory (modules no longer ship
+    # them). config.actions below point daedalus_ai + agent memory at our agent.
+    daedalus_ai: '*'
+
+  actions:
+    # Point the chat sidebar at our assistant and keep image generation off by
+    # default (no image provider/key is assumed here; the Gemini provider layer
+    # wires text_to_image, the site owner flips this on after adding a key).
+    daedalus_ai.settings:
+      simpleConfigUpdate:
+        assistant_id: daedalus
+        image_generation_enabled: false
+    # Persist agent state across turns for our agent.
+    daedalus_ai_memory.settings:
+      simpleConfigUpdate:
+        enabled_agents:
+          daedalus: daedalus
+    # Hide noise/system entity types from the AI tools (sensible default).
+    daedalus_blueprint_ai.settings:
+      simpleConfigUpdate:
+        hidden_entity_types:
+          - ai_log
+          - ai_file
+          - block_content
+          - crop
+          - design_system
+          - file
+          - menu_link_content
+          - path_alias
+          - stencil
+          - daedalus_animation
+          - daedalus_skin
+          - daedalus_swatch
+          - daedalus_variant
+          - user
+          - workspace

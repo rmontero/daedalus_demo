@@ -1,0 +1,9 @@
+parameters:
+  level: 2
+  paths:
+    - .
+  excludePaths:
+    - '*/node_modules/*'
+  reportUnmatchedIgnoredErrors: false
+includes:
+  - phpstan-baseline.neon

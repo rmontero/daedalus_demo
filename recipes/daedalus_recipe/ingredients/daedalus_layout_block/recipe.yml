@@ -1,0 +1,78 @@
+name: 'Daedalus Layout Block'
+description: 'Adds the layout block type: a standalone block whose display is built with the page builder, for theme regions like the footer.'
+type: 'Block type'
+
+# Config-only: no module ships this bundle (daedalus_edit_layout_block was
+# retired when nesting became nested sections; this is the theme-region
+# block, a different job). The promoted block types (text, image, formatted
+# text) and their icons come from the block ingredients; each of them pulls
+# in the engine itself.
+recipes:
+  - daedalus_text_block
+  - daedalus_image_block
+  - daedalus_formatted_text_block
+
+install:
+  - block_content
+  - layout_builder
+  # Enforces the layout_block nesting exclusion below; its restriction
+  # plugin filters the same filtered-definitions spine the blueprint schema,
+  # Add panel, validator, and deserializer all route through.
+  - layout_builder_restrictions
+  - daedalus_layout
+  - daedalus_ui
+
+config:
+  # Not strict. The bundle diverges on any site where Edit Mode settings
+  # were saved (the convergence action below writes the daedalus_ui status
+  # onto it), and the view display diverges once a site is built (Layout
+  # Builder normalization plus the convergence action re-saving it), so
+  # neither can be compared verbatim. The layout field and its storage
+  # (layout_builder__layout on block_content) were the strict pair, but
+  # core creates that storage itself on any site that enabled Layout
+  # Builder on a block type, and such a copy can differ from the shipped
+  # one in langcode and in the field's label (a non-English site); the
+  # storage shape cannot differ, since core owns it too, and the strict
+  # compare keeps langcode and labels, so the pair refused every such site.
+  # The import only creates what is missing.
+  strict: false
+  actions:
+    # Config import only creates missing config; it never updates existing
+    # config. A site that carries the bundle from the retired
+    # daedalus_edit_layout_block module (or hand-made fixtures) never got the
+    # daedalus_ui status, and without it ShouldNotEditMode vetoes Edit
+    # Mode on the block's editing route. This action declares the desired
+    # state so re-applying the recipe converges existing sites too.
+    block_content.type.layout_block:
+      # Page builder saves honor the bundle's revision setting (daedalus_edit
+      # Tempstore::prepareNewRevision mirrors core's entity forms), so a
+      # root block's edit history is only recoverable when the bundle
+      # creates revisions. Converged here for existing bundles too.
+      setProperties:
+        revision: true
+      setThirdPartySettings:
+        - module: daedalus_ui
+          key: status
+          value:
+            edit: true
+    # Same convergence for the view display: declare the desired daedalus_layout
+    # state (mirroring the shipped YAML) so promoted block and icon changes
+    # reach sites whose display already exists.
+    core.entity_view_display.block_content.layout_block.default:
+      setThirdPartySettings:
+        - module: daedalus_layout
+          key: promoted_blocks
+          value:
+            'inline_block:formatted_text': 'inline_block:formatted_text'
+            'inline_block:text': 'inline_block:text'
+            'inline_block:image': 'inline_block:image'
+      # A layout block never nests another layout block: nesting is nested
+      # sections (LayoutBlockToSectionTransform's target shape), so the
+      # denylist removes inline_block:layout_block from this display's AI
+      # schema, Add panel, validator, and deserializer through the shared
+      # filtered-definitions spine. The append action converges on re-apply
+      # and preserves site-authored restrictions.
+      entityViewModeRestrictionAppendRestrictedBlocks:
+        blocks:
+          'Inline blocks':
+            - 'inline_block:layout_block'

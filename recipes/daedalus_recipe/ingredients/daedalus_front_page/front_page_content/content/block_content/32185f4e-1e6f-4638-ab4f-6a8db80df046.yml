@@ -1,0 +1,18 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 32185f4e-1e6f-4638-ab4f-6a8db80df046
+  bundle: formatted_text
+  default_langcode: en
+default:
+  status:
+    - value: true
+  info:
+    - value: 'Formatted text'
+  reusable:
+    - value: false
+  revision_translation_affected:
+    - value: true
+  field_formatted_text_text:
+    - value: '<p class="s-pmj">Default styles and design tokens are defined in a <strong>skin</strong>, which is located in <code>appearance &gt; skins</code>.</p><p class="s-0a7">Notably, the <strong>enforcement </strong>setting in <code>appearance &gt; design system</code> controls how strict the style validator is. On strict, it only allows css properties defined in the design system. Style guide''s can constrain the values that are accepted. <strong>Open</strong> is recommended for <em>absolute</em> freedom and creativity.</p>'
+      format: daedalus_edit_formatted_text

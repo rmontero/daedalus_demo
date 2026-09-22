@@ -1,0 +1,19 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 42f62e5d-bb96-45c6-97d6-4f1f70360574
+  bundle: text
+  default_langcode: en
+default:
+  status:
+    - value: true
+  info:
+    - value: Text
+  reusable:
+    - value: false
+  revision_translation_affected:
+    - value: true
+  field_text_tag:
+    - value: h2
+  field_text_text:
+    - value: 'Next steps'

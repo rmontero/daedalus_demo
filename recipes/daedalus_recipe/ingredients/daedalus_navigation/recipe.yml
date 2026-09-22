@@ -1,0 +1,23 @@
+name: 'Daedalus Navigation'
+description: 'Installs the core navigation left sidebar, without the shortcuts and help extras core places by default.'
+type: 'Site'
+
+install:
+  - navigation
+
+config:
+  # Not strict: the import only creates what is missing, so it is the
+  # shipped layout on a fresh site and a no-op on one that already has
+  # navigation. navigation.block_layout is site-editable (the sidebar's
+  # layout UI writes it), so a strict compare refused the whole recipe on
+  # any site that touched its sidebar, for a difference the import would
+  # never overwrite anyway. Navigation's shipped config is simple config,
+  # so it lands at module install. The shortcuts and help components in
+  # navigation.block_layout stay as shipped: without the shortcut and help
+  # modules both blocks render empty, which is cheaper than fighting core's
+  # layout with a config action on every core update. A minimal sidebar
+  # (content, administration, user) is the suite's default; a site that
+  # wants shortcuts or help installs the modules and the blocks light up.
+  strict: false
+  import:
+    navigation: '*'

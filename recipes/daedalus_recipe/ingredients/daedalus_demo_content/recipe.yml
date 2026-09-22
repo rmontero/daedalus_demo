@@ -1,0 +1,14 @@
+name: 'Daedalus Demo Content'
+description: 'The opt-in starter set for a new Daedalus site: a ready-to-edit site header and footer placed in the theme regions, a welcome page built with the page builder, a Home link in the main menu, and one demo media item (the Druplicon) so a freshly placed image block arrives with a sample image. Sets the site front page to the welcome page, so apply it to an existing site only if that is wanted. Apply after the daedalus umbrella, which ships the block types and Page content type this content is built from.'
+type: 'Site'
+
+# The header, footer and front page are ingredients of their own so each
+# stays applicable alone; this recipe composes them. Sub-recipes apply
+# completely before this recipe's own content/ directory (the Druplicon
+# media, picked by field_sample_value for a new image block because on a
+# new site it is the only published media entity).
+recipes:
+  - daedalus_header_block
+  - daedalus_footer_block
+  - daedalus_front_page
+  - daedalus_media_image

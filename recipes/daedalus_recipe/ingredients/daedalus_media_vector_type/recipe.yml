@@ -1,0 +1,34 @@
+name: 'Daedalus Media Vector Type'
+description: 'Adds the Vector image (SVG) media type. Role-less: grants no upload permissions, so any lane can pull it in without side effects.'
+type: 'Site'
+
+# The type without the roles. Deliberately grants nothing: SVG upload is
+# restricted to trusted roles as one layer of the suite's layered SVG
+# security, and WHICH roles are trusted is the consumer's call. The
+# suite's own grants live centrally in daedalus_editor_roles (applied
+# last by the umbrella); composing recipes make their own. Ingredients
+# whose config merely references the type (the image block's media
+# reference field allows the vector bundle) depend
+# on this ingredient directly so a standalone apply satisfies the
+# dependency without dragging roles in.
+
+install:
+  # media_library first so the media bundle submodule's optional
+  # media-library form/view displays install with the Vector image type.
+  - media_library
+  - svg_image_field
+  - svg_image_field_media_bundle
+
+config:
+  # Curated like core's image_media_type recipe: only the field storage is
+  # strict (it influences the database layout). The bundle's form display
+  # does not round-trip (the path module appends a path component on save),
+  # so strict: true would crash re-application on a converged site.
+  strict:
+    - field.storage.media.field_media_svg
+  # Modules installed by a recipe do NOT get their default config installed;
+  # the recipe must import it. '*' covers the submodule's install config (the
+  # Vector image type, its SVG source field) and the optional media-library
+  # form/view displays (their media_library dependency is satisfied above).
+  import:
+    svg_image_field_media_bundle: '*'

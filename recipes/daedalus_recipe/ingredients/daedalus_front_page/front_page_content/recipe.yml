@@ -1,0 +1,19 @@
+name: 'Daedalus Front Page Content'
+description: "The front page content: a page node with a built layout and the Home menu link, imported from this ingredient's content/ directory. Nested inside daedalus_front_page so the node and its alias exist before the parent points page.front at them."
+type: 'Site'
+
+# The page type the node is an instance of and the block types its layout
+# places. Paths are Drupal-root relative: recipe names containing a slash
+# resolve from the Drupal root, and a nested ingredient cannot use a bare
+# name.
+recipes:
+  - ../recipes/daedalus_recipe/ingredients/daedalus_page
+  - ../recipes/daedalus_recipe/ingredients/daedalus_text_block
+  - ../recipes/daedalus_recipe/ingredients/daedalus_formatted_text_block
+
+# The Home link is a menu_link_content entity.
+install:
+  - menu_link_content
+
+# Content import always skips existing entities, so a site that edited or
+# replaced its front page is never clobbered on re-apply.

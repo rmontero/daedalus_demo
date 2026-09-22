@@ -1,0 +1,239 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ea7eba1d-23e1-4b50-bd0f-9578a3376c86
+  bundle: page
+  default_langcode: en
+  depends:
+    34ec01ac-99ba-468a-9a85-f7fc9e4f6740: block_content
+    20aeacc4-f528-4e9c-8e9c-e9400aed960c: block_content
+    6eac7583-55b2-471c-ab25-f0e946b3d792: block_content
+    1548b5df-ee7c-4d01-9acb-4711f1a94c6a: block_content
+    55448679-cf04-42e3-ba8d-40f7d53ff045: block_content
+    c88a86de-cc30-4cb4-a729-7e73a2d4161c: block_content
+    03349684-e922-43b1-a078-8fdf9c20d6bc: block_content
+    32185f4e-1e6f-4638-ab4f-6a8db80df046: block_content
+    42f62e5d-bb96-45c6-97d6-4f1f70360574: block_content
+    33bc974b-b205-426b-b44c-d31f76fc5e57: block_content
+default:
+  revision_uid:
+    - target_id: 1
+  revision_log:
+    - value: 'Shipped welcome page: replace or edit freely.'
+  status:
+    - value: true
+  uid:
+    - target_id: 1
+  title:
+    - value: Welcome!
+  promote:
+    - value: false
+  sticky:
+    - value: false
+  path:
+    - alias: /welcome
+      langcode: en
+  layout_builder__layout:
+    - section:
+        layout_id: daedalus_stylish_container
+        layout_settings:
+          label: Welcome
+        components:
+          66f39f31-8735-431e-9848-0db7e34e81ff:
+            uuid: 66f39f31-8735-431e-9848-0db7e34e81ff
+            region: content
+            configuration:
+              id: 'inline_block:text'
+              label: 'Front page title'
+              label_display: '0'
+              provider: layout_builder
+              view_mode: default
+              block_uuid: 34ec01ac-99ba-468a-9a85-f7fc9e4f6740
+            weight: 0
+            additional: {}
+          e12f04b1-289f-4a33-a7f9-d506411a67f7:
+            uuid: e12f04b1-289f-4a33-a7f9-d506411a67f7
+            region: content
+            configuration:
+              id: 'inline_block:formatted_text'
+              label: 'Front page body'
+              label_display: '0'
+              provider: layout_builder
+              view_mode: default
+              block_uuid: 20aeacc4-f528-4e9c-8e9c-e9400aed960c
+            weight: 1
+            additional: {}
+        third_party_settings:
+          daedalus_layout:
+            uuid: 093297f5-3d58-4b23-a30c-4f6bd4967fdc
+    - section:
+        layout_id: daedalus_stylish_container
+        layout_settings:
+          label: Info
+        components:
+          69fbc3c9-3d20-43fe-8256-62f6daac7277:
+            uuid: 69fbc3c9-3d20-43fe-8256-62f6daac7277
+            region: content
+            configuration:
+              id: daedalus_layout_section
+              label_display: '0'
+              section:
+                layout_id: daedalus_stylish_container
+                layout_settings:
+                  label: Elements
+                components:
+                  4d523676-d351-47d2-a13a-c277b352e641:
+                    uuid: 4d523676-d351-47d2-a13a-c277b352e641
+                    region: content
+                    configuration:
+                      id: 'inline_block:text'
+                      label: Text
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: 6eac7583-55b2-471c-ab25-f0e946b3d792
+                    weight: 0
+                    additional: {}
+                  59a78d19-7feb-4ea9-8df3-047f3228272c:
+                    uuid: 59a78d19-7feb-4ea9-8df3-047f3228272c
+                    region: content
+                    configuration:
+                      id: 'inline_block:formatted_text'
+                      label: 'Formatted text'
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: 1548b5df-ee7c-4d01-9acb-4711f1a94c6a
+                    weight: 1
+                    additional: {}
+                third_party_settings:
+                  daedalus_layout:
+                    uuid: 69fbc3c9-3d20-43fe-8256-62f6daac7277
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 0
+            additional: {}
+          4edce53e-0422-4b11-ac4d-6f408035c3b6:
+            uuid: 4edce53e-0422-4b11-ac4d-6f408035c3b6
+            region: content
+            configuration:
+              id: daedalus_layout_section
+              label_display: '0'
+              section:
+                layout_id: daedalus_stylish_container
+                layout_settings:
+                  label: 'Artificial Intelligence'
+                components:
+                  246cc915-2174-427b-973e-7a2fa2abb2a0:
+                    uuid: 246cc915-2174-427b-973e-7a2fa2abb2a0
+                    region: content
+                    configuration:
+                      id: 'inline_block:text'
+                      label: Text
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: 55448679-cf04-42e3-ba8d-40f7d53ff045
+                    weight: 0
+                    additional: {}
+                  7a99a5b5-427e-40d4-a857-d9553b32d8dd:
+                    uuid: 7a99a5b5-427e-40d4-a857-d9553b32d8dd
+                    region: content
+                    configuration:
+                      id: 'inline_block:formatted_text'
+                      label: 'Formatted text'
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: c88a86de-cc30-4cb4-a729-7e73a2d4161c
+                    weight: 1
+                    additional: {}
+                third_party_settings:
+                  daedalus_layout:
+                    uuid: 4edce53e-0422-4b11-ac4d-6f408035c3b6
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 2
+            additional: {}
+          e524df85-7d97-4550-b3c3-330c540f0edc:
+            uuid: e524df85-7d97-4550-b3c3-330c540f0edc
+            region: content
+            configuration:
+              id: daedalus_layout_section
+              label_display: '0'
+              section:
+                layout_id: daedalus_stylish_container
+                layout_settings:
+                  label: Styling
+                components:
+                  8e58986d-7979-4b1e-aac0-1ef486e6438d:
+                    uuid: 8e58986d-7979-4b1e-aac0-1ef486e6438d
+                    region: content
+                    configuration:
+                      id: 'inline_block:text'
+                      label: Text
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: 03349684-e922-43b1-a078-8fdf9c20d6bc
+                    weight: 0
+                    additional: {}
+                  74f1206c-e43d-42cf-81e2-8cfaf0e949ee:
+                    uuid: 74f1206c-e43d-42cf-81e2-8cfaf0e949ee
+                    region: content
+                    configuration:
+                      id: 'inline_block:formatted_text'
+                      label: 'Formatted text'
+                      label_display: '0'
+                      provider: layout_builder
+                      view_mode: default
+                      block_uuid: 32185f4e-1e6f-4638-ab4f-6a8db80df046
+                    weight: 1
+                    additional: {}
+                third_party_settings:
+                  daedalus_layout:
+                    uuid: e524df85-7d97-4550-b3c3-330c540f0edc
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 1
+            additional: {}
+        third_party_settings:
+          daedalus_layout:
+            uuid: ee8a4ce7-7162-45a8-bcc4-bcf0773a1767
+    - section:
+        layout_id: daedalus_stylish_container
+        layout_settings:
+          label: Future
+        components:
+          e4fd5741-ff06-478e-9f98-87eccddfab98:
+            uuid: e4fd5741-ff06-478e-9f98-87eccddfab98
+            region: content
+            configuration:
+              id: 'inline_block:text'
+              label: Text
+              label_display: '0'
+              provider: layout_builder
+              view_mode: default
+              block_uuid: 42f62e5d-bb96-45c6-97d6-4f1f70360574
+            weight: 0
+            additional: {}
+          61b84686-51f2-4e24-9255-b6716c843a03:
+            uuid: 61b84686-51f2-4e24-9255-b6716c843a03
+            region: content
+            configuration:
+              id: 'inline_block:formatted_text'
+              label: 'Formatted text'
+              label_display: '0'
+              provider: layout_builder
+              view_mode: default
+              block_uuid: 33bc974b-b205-426b-b44c-d31f76fc5e57
+            weight: 1
+            additional: {}
+        third_party_settings:
+          daedalus_layout:
+            uuid: ac95cf2a-6899-4d99-8763-8bf0d2ed05be
+  daedalus_stylish_styles:
+    - value: '{"container:c0d89921-04a5-48d1-8720-d7508da565f6":{"variants":[{"variant":"container_lg","fragment":""}],"default":{"padding-top":"var(--space-xl)","padding-bottom":"var(--space-xl)"}},"container:ee8a4ce7-7162-45a8-bcc4-bcf0773a1767":{"variants":[{"variant":"row","fragment":""},{"variant":"container_lg","fragment":""}]},"container:69fbc3c9-3d20-43fe-8256-62f6daac7277":{"default":{"background-color":"var(--color-surface)","border-radius":"var(--radius-md)","padding":"var(--space-md)","gap":"0","display":"block"}},"container:e524df85-7d97-4550-b3c3-330c540f0edc":{"default":{"border-radius":"var(--radius-md)","padding":"var(--space-md)","background-color":"var(--color-surface)","display":"block"}},"container:4edce53e-0422-4b11-ac4d-6f408035c3b6":{"default":{"background-color":"var(--color-surface)","border-radius":"var(--radius-md)","padding":"var(--space-md)","display":"block"}},"container:ac95cf2a-6899-4d99-8763-8bf0d2ed05be":{"variants":[{"variant":"container_lg","fragment":""}]},"container:093297f5-3d58-4b23-a30c-4f6bd4967fdc":{"variants":[{"variant":"container_lg","fragment":""}]},"entity:ea7eba1d-23e1-4b50-bd0f-9578a3376c86":{"default":{"padding-top":"var(--space-lg)","padding-bottom":"var(--space-lg)"}},"entity:ea7eba1d-23e1-4b50-bd0f-9578a3376c86::.daedalus-layout-layout":{"default":{"gap":"var(--space-lg)"}}}'

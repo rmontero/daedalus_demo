@@ -1,0 +1,14 @@
+# Verbatim copy of block_content's install config. Recipe-driven module
+# installs skip default config creation, so recipe-built sites never get
+# this view mode, but a site's theme-region block placements
+# reference it (settings.view_mode: full) and fail validation without it.
+langcode: en
+status: false
+dependencies:
+  module:
+    - block_content
+id: block_content.full
+label: Full
+description: ''
+targetEntityType: block_content
+cache: true

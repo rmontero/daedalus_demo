@@ -1,0 +1,36 @@
+{
+    "description": "CSpell configuration for the Daedalus recipe project. Based on the Gitlab Templates default; see https://project.pages.drupalcode.org/gitlab_templates/jobs/cspell/ for more details.",
+    "language": "en-US",
+    "allowCompoundWords": false,
+    "globRoot": ".",
+    "minWordLength": 4,
+    "ignorePaths": [],
+    "dictionaries": [],
+    "dictionaryDefinitions": [],
+    "words": [
+      "barebones",
+      "cset",
+      "dropzones",
+      "Orbstack",
+      "underivable"
+    ],
+    "flagWords": [
+      "blacklist->blocklist, denylist",
+      "blacklists->blocklists, denylists",
+      "blacklist's->blocklist's, denylist's",
+      "blacklisted->blocklisted, denylisted",
+      "e-mail",
+      "grey",
+      "queuing",
+      "whitelist:allowlist",
+      "whitelists:allowlists",
+      "whitelist's:allowlist's",
+      "whitelisted:allowlisted"
+    ],
+    "overrides": [
+        {
+            "filename": "**/{*.engine,*.inc,*.install,*.module,*.profile,*.theme}",
+            "languageId": "php"
+        }
+    ]
+}

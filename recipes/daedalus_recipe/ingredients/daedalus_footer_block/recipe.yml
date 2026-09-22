@@ -1,0 +1,20 @@
+name: 'Daedalus Footer Block'
+description: 'Ships a ready-to-edit site footer: a layout block with a built section as recipe default content, placed in the footer region.'
+type: 'Site'
+
+# The footer content lives in the nested footer_content sub-ingredient rather
+# than this recipe's own content/ directory because of ordering: a recipe
+# applies its config before it imports its content, but sub-recipes apply
+# completely (config and content) first. The placement in config/ has a
+# plugin ID derived from the content entity's UUID, so the entity must exist
+# when the placement saves; a placement saved against a missing entity falls
+# back to the broken plugin and silently drops its content and module
+# dependencies.
+recipes:
+  - ../recipes/daedalus_recipe/ingredients/daedalus_footer_block/footer_content
+
+# The placement targets a daedalus_theme region, and included recipes
+# apply before the parent recipe's own install list reaches the theme,
+# so this ingredient must ensure it itself.
+install:
+  - daedalus_theme

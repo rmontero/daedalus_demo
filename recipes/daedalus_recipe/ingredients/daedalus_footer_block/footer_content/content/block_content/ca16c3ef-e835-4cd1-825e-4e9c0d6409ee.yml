@@ -1,0 +1,18 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: ca16c3ef-e835-4cd1-825e-4e9c0d6409ee
+  bundle: formatted_text
+  default_langcode: en
+default:
+  status:
+    - value: true
+  info:
+    - value: 'Formatted text'
+  reusable:
+    - value: false
+  revision_translation_affected:
+    - value: true
+  field_formatted_text_text:
+    - value: '<p class="s-a87">To edit: <strong>double click</strong> this footer or go to <code>Structure &gt; Block Layout &gt; Footer &gt; Edit Layout</code></p>'
+      format: daedalus_edit_formatted_text

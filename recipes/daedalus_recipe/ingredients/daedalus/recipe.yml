@@ -1,0 +1,16 @@
+name: 'Daedalus'
+description: 'Installs and configures the complete Daedalus page builder: page-building modules, block types, and the Page content type. Ships configuration only; the starter header, footer, welcome page and demo media are the opt-in daedalus_demo_content ingredient.'
+type: 'Site'
+
+recipes:
+  - daedalus_base
+  - daedalus_styling
+  - daedalus_image_block
+  - daedalus_text_block
+  - daedalus_formatted_text_block
+  - daedalus_layout_block
+  - daedalus_page
+  # The roles, applied LAST so every granted permission's provider module
+  # and bundle already exist (per-bundle permission strings do not exist
+  # until the bundle config does).
+  - daedalus_editor_roles

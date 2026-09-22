@@ -1,0 +1,49 @@
+name: 'Daedalus Styling'
+description: 'Installs Daedalus Stylish — the Daedalus styling layer — wearing the shipped Olivero design system, with the shipped block variants as default content and the Daedalus Stylish Layouts section templates with their per-layout default variants.'
+type: 'Site'
+
+recipes:
+  # Daedalus Stylish hard-depends on daedalus_blueprint (operation spine) and
+  # daedalus_ui (selectable keys); the engine ingredient installs the
+  # latter. Precise dependencies, not the daedalus_base alias — composing
+  # recipes (like a platform recipe) pick their own extras.
+  - daedalus_blueprint
+  - daedalus_engine
+
+install:
+  - daedalus_stylish
+  # Full-bleed section layout templates (constrained content-width container,
+  # per-section width control).
+  - daedalus_stylish_layouts
+  - daedalus_stylish_layers
+  # The Olivero design system: core's front-end look as daedalus_stylish data, so
+  # a fresh site wears a finished, recognizably Drupal look out of the
+  # box. Design systems ship from modules (the activation is site-wide,
+  # not theme-bound): the module's install config is the system itself,
+  # and its hook_modules_installed syncs the skin through the disk lane.
+  - daedalus_stylish_olivero_skin
+
+config:
+  strict: false
+  import:
+    daedalus_stylish: '*'
+    daedalus_stylish_layouts: '*'
+    daedalus_stylish_layers: '*'
+    # The olivero design system (daedalus_blueprint.design_system.olivero):
+    # a recipe imports a module's install config only when listed here.
+    daedalus_stylish_olivero_skin: '*'
+  actions:
+    # The site wears the shipped Olivero design system (its default skin
+    # is the olivero skin). A composing recipe that ships its own design
+    # system sets this again in its own actions, which apply after every
+    # included recipe. The enforcement posture rides the system, not this
+    # recipe: enforcement is a design system's own property, and the
+    # shipped olivero system is `enforcement: open` (its declarations are
+    # offers; a typed literal still commits). A site that wants the
+    # style-guide-enforcing posture edits its active design system to
+    # guarded (constraints stay law) or strict (only properties the page
+    # builder declarations allow may be styled, and the freeform CSS slot
+    # is disabled), or ships its own design system and activates it here.
+    daedalus_blueprint.settings:
+      simpleConfigUpdate:
+        active_design_system: olivero

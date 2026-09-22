@@ -1,0 +1,63 @@
+name: 'Daedalus Media Image'
+description: 'Adds the image media type and the media library used by Daedalus image blocks.'
+type: 'Site'
+
+recipes:
+  - core/recipes/image_media_type
+
+install:
+  - media_library
+
+config:
+  # Not strict. Core's convention is to compare only field storages
+  # strictly (they influence the database layout), and the one storage
+  # here, field.storage.media.field_media_image, belongs to core's
+  # image_media_type recipe above, which already lists it strictly; the
+  # convention is honored where the storage lives. Listing it here as
+  # well would not work: core compares each strict name against the
+  # recipe's OWN config, and this ingredient's is only media's and
+  # media_library's module config, so the storage would read as absent
+  # and every site that already has it would be refused. That module
+  # config (views.view.media, the media library view and displays) is
+  # exactly what a site edits, so strict: true refused any site with a
+  # customized media view and blocked image block, layout block and page
+  # through the dependency chain. The import only creates what is
+  # missing.
+  strict: false
+  import:
+    media: '*'
+    media_library: '*'
+  actions:
+    # The image media type's source field (field_media_image) renders inside an
+    # image block's media reference field. Both get edit indicators, which stack;
+    # the inner one wins the click and selects a plain image field (no AI image
+    # generation) instead of the media reference where generation is wired.
+    # Disabling inline editing on the source field drops its indicator so the
+    # reference field stays the selectable target, making the AI "change this
+    # image" flow work out of the box. Temporary: a future selection model will
+    # disambiguate overlapping elements generally.
+    field.field.media.image.field_media_image:
+      setThirdPartySettings:
+        - module: daedalus_edit
+          key: disable
+          value: true
+    # Core's image_media_type recipe renders the source field through the
+    # 'large' style (960px max). The image block's composed render derives
+    # its img src from THIS display's formatter settings (there is no
+    # formatter chain on the block itself), so that style would silently
+    # cap every image block on the site. Serve the original: page styling
+    # (the block's width control) owns the presented size.
+    core.entity_view_display.media.image.default:
+      setComponent:
+        name: field_media_image
+        options:
+          type: image
+          label: visually_hidden
+          settings:
+            image_style: ''
+            image_link: ''
+            image_loading:
+              attribute: lazy
+          third_party_settings: {}
+          weight: 1
+          region: content

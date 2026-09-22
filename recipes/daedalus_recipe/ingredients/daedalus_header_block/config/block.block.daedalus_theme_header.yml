@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:layout_block:1f8f09bd-04f9-497c-b100-7732437d3f39'
+  module:
+    - block_content
+  theme:
+    - daedalus_theme
+id: daedalus_theme_header
+theme: daedalus_theme
+region: header
+weight: 1
+provider: null
+plugin: 'block_content:1f8f09bd-04f9-497c-b100-7732437d3f39'
+settings:
+  id: 'block_content:1f8f09bd-04f9-497c-b100-7732437d3f39'
+  label: Header
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility: {}

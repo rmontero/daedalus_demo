@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies: {}
+id: daedalus
+label: 'Daedalus AI'
+description: 'Chat assistant fronting the Daedalus page builder agent in the Edit Mode sidebar.'
+system_prompt: ''
+pre_action_prompt: ''
+instructions: ''
+allow_history: session_one_thread
+history_context_length: '20'
+error_message: 'I am sorry, something went terribly wrong. Try asking me again.'
+specific_error_messages:
+  AiBadRequestException: ''
+  AiRateLimitException: ''
+  AiQuotaException: ''
+  AiSetupFailureException: ''
+  AiRequestErrorException: ''
+llm_provider: '__default__'
+llm_model: ''
+# Reaches the provider via daedalus_ai_memory's AgentMemoryRunner (upstream
+# drops it on the agent path). No top_p and no temperature: Claude 4+
+# models reject requests carrying both, and Claude Sonnet 5 rejects
+# temperature outright ("`temperature` is deprecated for this model",
+# Anthropic 400 on every sidebar turn).
+# max_tokens: interleaved thinking and the tool call share this one
+# output budget; at 16384 a whole-page create (~5k tokens) plus a long
+# thinking pass truncated the tool call mid-JSON and the runner executed
+# the garbage. 64000 is the highest value valid across the models a site
+# would plausibly pick (Anthropic 400s, not clamps, above a model's cap;
+# Haiku 4.5 and Sonnet 4.5 top out at 64k).
+llm_configuration:
+  max_tokens: 64000
+actions_enabled: {}
+roles:
+  anonymous: 0
+  authenticated: 0
+  administrator: 0
+use_function_calling: true
+ai_agent: daedalus

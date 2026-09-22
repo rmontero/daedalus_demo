@@ -1,0 +1,15 @@
+name: 'Daedalus Base'
+description: 'Composes the Daedalus foundation: themes, sample values, entity blueprint, the page-building engine, navigation, and media. A manual-install alias — each part is its own ingredient. Roles are not part of the foundation: daedalus_editor_roles grants bundle permissions, so the umbrella applies it last, after the bundles exist.'
+type: 'Site'
+
+recipes:
+  - daedalus_themes
+  - daedalus_sample_values
+  - daedalus_blueprint
+  - daedalus_engine
+  - daedalus_navigation
+  - daedalus_media_image
+  # The vector (SVG) media type, role-less by design: every grant the
+  # suite makes lives centrally in daedalus_editor_roles (applied last
+  # by the umbrella, after the bundles exist).
+  - daedalus_media_vector_type

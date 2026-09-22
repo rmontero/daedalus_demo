@@ -1,0 +1,13 @@
+name: 'Daedalus Footer Block Content'
+description: "The footer block content: a layout block entity with a built section, imported from this ingredient's content/ directory. Nested inside daedalus_footer_block so the content imports before the parent applies the region placement."
+type: 'Site'
+
+# The layout block type the footer is an instance of (it pulls in the text
+# block type the footer's copy uses). Path is Drupal-root relative: recipe
+# names containing a slash resolve from the Drupal root, and a nested
+# ingredient cannot use a bare name.
+recipes:
+  - ../recipes/daedalus_recipe/ingredients/daedalus_layout_block
+
+# Content import always skips existing entities, so a site that edited its
+# footer is never clobbered on re-apply.

@@ -1,0 +1,55 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 1f8f09bd-04f9-497c-b100-7732437d3f39
+  bundle: layout_block
+  default_langcode: en
+default:
+  revision_user:
+    - target_id: 1
+  status:
+    - value: true
+  info:
+    - value: Header
+  reusable:
+    - value: true
+  revision_translation_affected:
+    - value: true
+  layout_builder__layout:
+    - section:
+        layout_id: daedalus_stylish_container
+        layout_settings:
+          label: ''
+        components:
+          da951346-d197-403a-83e0-62b8ef6601fc:
+            uuid: da951346-d197-403a-83e0-62b8ef6601fc
+            region: content
+            configuration:
+              id: system_branding_block
+              label: ''
+              label_display: '0'
+              provider: system
+              use_site_logo: false
+              use_site_name: true
+              use_site_slogan: false
+              context_mapping: {}
+            weight: 0
+            additional: {}
+          e7d791f8-912d-4792-91d1-76c444e3f9bc:
+            uuid: e7d791f8-912d-4792-91d1-76c444e3f9bc
+            region: content
+            configuration:
+              id: 'navigation_menu:main'
+              label: ''
+              label_display: '0'
+              provider: navigation
+              level: 1
+              depth: 0
+              context_mapping: {}
+            weight: 1
+            additional: {}
+        third_party_settings:
+          daedalus_layout:
+            uuid: 6f021a00-1598-4951-98be-0d5ff0dd54c7
+  daedalus_stylish_styles:
+    - value: '{"container:6f021a00-1598-4951-98be-0d5ff0dd54c7":{"variants":[{"variant":"row","fragment":""},{"variant":"container_lg","fragment":""}],"default":{"align-items":"center"},"narrow":{"flex-direction":"row","padding-inline":"0","flex-wrap":"wrap"}},"block:da951346-d197-403a-83e0-62b8ef6601fc":{"default":{"background-image":"linear-gradient(to right, #1b9ae4, #116392)","padding-top":"2.5rem","padding-bottom":"2.5rem","padding-left":"2.5rem","padding-right":"2.5rem"}},"block:da951346-d197-403a-83e0-62b8ef6601fc::.site-name":{"default":{"color":"#ffffff","font-family":"system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif","font-size":"var(--text-title)","font-weight":"700","text-decoration-line":"none"}},"block:e7d791f8-912d-4792-91d1-76c444e3f9bc::.menu":{"default":{"list-style":"none","display":"flex","justify-content":"flex-end","gap":"2rem","margin-top":"0","margin-bottom":"0","padding-left":"0"}},"block:e7d791f8-912d-4792-91d1-76c444e3f9bc::.menu-link":{"default":{"font-family":"system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif","font-size":"1rem","font-weight":"700","text-decoration-line":"none"},"hover":{"color":"var(--color-accent-hover)"}}}'

@@ -1,0 +1,18 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 1548b5df-ee7c-4d01-9acb-4711f1a94c6a
+  bundle: formatted_text
+  default_langcode: en
+default:
+  status:
+    - value: true
+  info:
+    - value: 'Formatted text'
+  reusable:
+    - value: false
+  revision_translation_affected:
+    - value: true
+  field_formatted_text_text:
+    - value: '<p class="s-z41">A page is a tree of containers and blocks. Containers hold blocks and other containers, to any depth.&nbsp;</p><p class="s-rp5">Columns, gaps, and widths are styles on a container, so the one container can be a stack today and a three-column grid tomorrow.&nbsp;</p>'
+      format: daedalus_edit_formatted_text

@@ -1,0 +1,18 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 20aeacc4-f528-4e9c-8e9c-e9400aed960c
+  bundle: formatted_text
+  default_langcode: en
+default:
+  status:
+    - value: true
+  info:
+    - value: 'Front page body'
+  reusable:
+    - value: false
+  revision_translation_affected:
+    - value: true
+  field_formatted_text_text:
+    - value: '<h2 class="s-a70">Try it</h2><p class="s-4t0">This page was built and styled with Daedalus and you can edit it.&nbsp;</p><ol class="s-t53"><li class="s-vlv" data-list-item-id="e306d664adcc541915feb2590a38795a0"><p class="s-qrm">Switch to <strong>Edit Mode</strong> by clicking the blue button on the top right.</p></li><li class="s-p5m" data-list-item-id="e80f14673e43947eb728bffe89c0d07f1"><p class="s-fmf">Choose the Edit tool (pencil) from the toolbar in the bottom center of the screen.&nbsp;</p></li><li class="s-yb3" data-list-item-id="e22b91c1d71a0cc58903f6b9375624773"><p class="s-1pt">Click this paragraph, and change a word! &nbsp;</p></li><li class="s-x4o" data-list-item-id="eea551029aedebac01e5811e7b861242d"><p class="s-2kx">Drag a block from the <strong>Blocks</strong> panel onto the page. &nbsp;</p></li><li class="s-6gf" data-list-item-id="ef8849ad7b09408b3c99b9d67afd311a5"><p class="s-swe">Select what you placed and style it using the Styles panel.</p></li><li class="s-7s6" data-list-item-id="e6f82d5c1d11c2948fc382c7df7aad455"><p class="s-z23"><strong>Save</strong>. Until then, nothing reaches visitors, and Discard changes puts everything back.&nbsp;</p></li></ol>'
+      format: daedalus_edit_formatted_text

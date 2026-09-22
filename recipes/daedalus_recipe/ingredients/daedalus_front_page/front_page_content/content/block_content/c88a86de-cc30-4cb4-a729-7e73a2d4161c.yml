@@ -1,0 +1,18 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: c88a86de-cc30-4cb4-a729-7e73a2d4161c
+  bundle: formatted_text
+  default_langcode: en
+default:
+  status:
+    - value: true
+  info:
+    - value: 'Formatted text'
+  reusable:
+    - value: false
+  revision_translation_affected:
+    - value: true
+  field_formatted_text_text:
+    - value: '<p class="s-kr1">The AI editing assistant builds and styles pages the same way you do. So everything it does is undoable and it conforms to your enforcement setting.&nbsp;</p><p class="s-dlc">If you pasted an API key during install, open Edit Mode and start chatting. To add or rotate keys, go to <code>Configuration &gt; System &gt; Keys</code>. If you skipped the AI at install, see <a href="https://www.drupal.org/project/daedalus_recipe">Daedalus AI</a>&nbsp;</p>'
+      format: daedalus_edit_formatted_text

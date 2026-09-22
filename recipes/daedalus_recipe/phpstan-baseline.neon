@@ -1,0 +1,19 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Drupal\\Tests\\BrowserTestBase\:\:\$defaultTheme is required\. See https\://www\.drupal\.org/node/3083055, which includes recommendations on which theme to use\.$#'
+			identifier: BrowserTestBase.defaultThemeRequired
+			count: 1
+			path: tests/src/FunctionalJavascript/DaedalusBehaviorTest.php
+
+		-
+			message: '#^Call to an undefined method Drupal\\Core\\Entity\\EntityInterface\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: ai/tests/src/Kernel/PromptSurfaceSnapshotTest.php
+
+		-
+			message: '#^Call to an undefined method Drupal\\Core\\Entity\\EntityInterface\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ai/tests/src/Kernel/ProviderConfigurationTest.php

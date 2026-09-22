@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 827cb6a9-7ac2-4fc8-bac7-eaba82a568a2
+  bundle: image
+  default_langcode: en
+  depends:
+    a8849bfa-03aa-4703-86e5-5abd1141ab89: file
+default:
+  status:
+    - value: true
+  uid:
+    - target_id: 1
+  name:
+    - value: Druplicon
+  created:
+    - value: 1742231595
+  revision_translation_affected:
+    - value: true
+  path:
+    - alias: ''
+      langcode: en
+  field_media_image:
+    - entity: a8849bfa-03aa-4703-86e5-5abd1141ab89
+      alt: 'Drupal drupal drupal'
+      title: ''
+      width: 1180
+      height: 1350

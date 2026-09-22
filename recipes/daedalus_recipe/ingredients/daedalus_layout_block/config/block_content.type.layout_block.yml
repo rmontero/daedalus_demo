@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - daedalus_ui
+third_party_settings:
+  daedalus_ui:
+    status:
+      edit: true
+id: layout_block
+label: 'Layout Block'
+revision: true
+description: 'A block whose display is built with the page builder. Place it in a theme region, like the footer, and edit its layout directly.'

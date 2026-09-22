@@ -1,0 +1,19 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 34ec01ac-99ba-468a-9a85-f7fc9e4f6740
+  bundle: text
+  default_langcode: en
+default:
+  status:
+    - value: true
+  info:
+    - value: 'Front page title'
+  reusable:
+    - value: false
+  revision_translation_affected:
+    - value: true
+  field_text_tag:
+    - value: h1
+  field_text_text:
+    - value: Welcome!

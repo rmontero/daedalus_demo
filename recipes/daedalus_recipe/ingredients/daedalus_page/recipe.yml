@@ -1,0 +1,132 @@
+name: 'Daedalus Page'
+description: 'Adds the Page content type, layout-enabled and configured for the Daedalus page builder.'
+type: 'Content type'
+
+# The shipped display promotes the text, image and formatted text block
+# types, so a standalone apply pulls them in.
+recipes:
+  # Pages ship with styling enabled, so the styling layer is part of this
+  # ingredient, not just the umbrella.
+  - daedalus_styling
+  - daedalus_image_block
+  - daedalus_text_block
+  - daedalus_formatted_text_block
+
+install:
+  # Listed although daedalus_edit_page depends on it: recipe validation only
+  # credits modules named in install lists (this recipe's or its
+  # dependencies'), not module dependencies, and the node.type.page action
+  # below needs node to count as installed on a fresh site.
+  - node
+  # daedalus_edit_page ships node.type.page and its display under config/install.
+  # RecipeRunner installs modules with config syncing on, so the module's
+  # config is never written at install time; the import below creates what
+  # is missing and leaves an existing bundle untouched.
+  - daedalus_edit_page
+  # Enforces the layout_block placement exclusion below; its restriction
+  # plugin filters the same filtered-definitions spine the blueprint schema,
+  # Add panel, validator, and deserializer all route through.
+  - layout_builder_restrictions
+
+config:
+  # Not strict. The bundle and its view display may legitimately pre-exist:
+  # a site carries node.type.page as "Basic page" (body field, preview on,
+  # no Layout Builder) from core's page_content_type recipe or an older
+  # standard profile, and the suite takes that bundle over rather than
+  # shipping a second page type. Import creates what is missing and never
+  # updates what exists, so the actions below declare the builder shape
+  # the bundle and display must converge to, on such a site and on one
+  # installed from an earlier release alike. The view display also
+  # diverges on any built site (Layout Builder section normalization), so
+  # it could never be compared verbatim anyway. The layout field and its
+  # storage (layout_builder__layout) were the strict pair, but core
+  # creates that storage itself on any site that enabled Layout Builder on
+  # a bundle, and such a copy can differ from the shipped one in langcode
+  # (a non-English site's default language) and in the field's label (a
+  # translated "Layout"); the storage shape cannot differ, since core owns
+  # it too, and the strict compare keeps langcode and labels, so the pair
+  # refused every such site for differences that do not matter. Limits of
+  # a takeover: an existing display keeps its own fields (the body stays;
+  # that is the site owner's field, not the recipe's to remove) and starts
+  # with an empty layout, the shipped default sections only reach a
+  # display the import created.
+  strict: false
+  import:
+    daedalus_edit_page: '*'
+    # RecipeRunner::installModule() installs modules with config syncing
+    # enabled, which skips config entity creation, so installing node never
+    # creates its view modes. The page builder stack renders and addresses
+    # pages in the 'full' view mode, so this ingredient imports it.
+    node:
+      - core.entity_view_mode.node.full
+  actions:
+    # The bundle as the builder wants it (mirrors daedalus_edit_page's shipped
+    # node.type.page): builder pages open in edit mode and skip core's
+    # preview, which detours out of the page builder.
+    node.type.page:
+      setProperties:
+        name: Page
+        description: 'Use <em>pages</em> to build with the page builder.'
+        new_revision: true
+        preview_mode: 0
+        display_submitted: false
+      setThirdPartySettings:
+        - module: menu_ui
+          key: available_menus
+          value:
+            - footer
+            - main
+        - module: menu_ui
+          key: parent
+          value: 'main:'
+        - module: daedalus_ui
+          key: initial_mode
+          value: edit
+        - module: daedalus_ui
+          key: status
+          value:
+            edit: true
+        - module: daedalus_ui
+          key: modes
+          value:
+            edit:
+              default_tool: selector
+    # Styling needs no explicit field creation here: daedalus_stylish defaults
+    # styling ON for every bundle passing the Daedalus Layout Edit Mode
+    # gate, its gate check runs on every save of a gate carrier (including
+    # the config import above), and daedalus_stylish_install() sweeps gate-passing
+    # bundles for anything a hook missed. Explicit creation would also
+    # trample a site's deliberate styling opt-out on re-apply.
+    # Config import only creates missing config; it never updates existing
+    # config. A site installed from an earlier release already has the page
+    # view display, so changes to the promoted blocks in daedalus_edit_page's
+    # install config would never reach it. This action declares the desired
+    # daedalus_layout state (mirroring the shipped install YAML) so re-applying the
+    # recipe converges existing sites too.
+    core.entity_view_display.node.page.default:
+      setThirdPartySettings:
+        - module: layout_builder
+          key: enabled
+          value: true
+        - module: layout_builder
+          key: allow_custom
+          value: true
+        - module: daedalus_layout
+          key: promoted_blocks
+          value:
+            'inline_block:image': 'inline_block:image'
+            'inline_block:formatted_text': 'inline_block:formatted_text'
+            'inline_block:text': 'inline_block:text'
+      # layout_block is a theme-region block (headers/footers), never
+      # placeable on pages: placing inline_block:layout_block is the legacy
+      # nesting pattern daedalus_layout's LayoutBlockToSectionTransform migrates
+      # away from, and one denylist entry here removes it from the AI
+      # schema, the Add panel, the validator, and the deserializer at once
+      # (all four route through the same filtered-definitions spine).
+      # daedalus_layout_block ships the type (headers/footers), so the
+      # entry is live on every suite site. The module's own append action
+      # converges on re-apply and preserves site-authored restrictions.
+      entityViewModeRestrictionAppendRestrictedBlocks:
+        blocks:
+          'Inline blocks':
+            - 'inline_block:layout_block'

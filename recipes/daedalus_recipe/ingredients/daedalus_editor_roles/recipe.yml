@@ -1,0 +1,129 @@
+name: 'Daedalus Editor Roles'
+description: 'Adds the administrator role and the Daedalus Editor role: the tested permission contract for editing content with the page builder.'
+type: 'Site'
+
+# Every permission the suite grants lives HERE, one central list per role
+# (composing recipes carry their own such list). The umbrella applies this
+# ingredient LAST, so every granted permission's provider module and
+# bundle already exist; per-bundle permission strings ('edit any text
+# block content') do not exist until the bundle config does. Applying
+# this ingredient standalone therefore only works on a site that already
+# carries the suite.
+
+recipes:
+  - core/recipes/administrator_role
+
+config:
+  strict: true
+  actions:
+    # The one role the suite ships: an editor who edits content and never
+    # configures the system. Every page-builder module's browser test
+    # installs this recipe and runs as a user holding only this role
+    # (daedalus's DaedalusFixtureTrait), so the grant list below is
+    # proven sufficient end-to-end on every test run. Deliberately absent: every
+    # configure/administer permission.
+    #
+    # Optional ingredients grant their own permissions onto this role
+    # additively when applied (the daedalus_ai recipe grants 'use ai
+    # assistant'). That is also the consumer contract: a bundle created
+    # after install (by a site or a composing recipe) has per-bundle
+    # permission strings this list cannot name, so whoever creates a
+    # bundle grants its create/edit/delete permissions themselves.
+    #
+    # createIfNotExists + grants rather than a shipped user.role yml: a
+    # live role always carries permissions a shipped shell does not, so a
+    # shell forces strict: false; action-only creation keeps this
+    # ingredient strict and re-applies as a no-op by construction.
+    user.role.daedalus_editor:
+      createIfNotExists:
+        id: daedalus_editor
+        label: 'Daedalus Editor'
+      grantPermissions:
+        # Enter Edit Mode (daedalus_ui) and edit fields in place
+        # (daedalus_edit).
+        - 'use daedalus ui edit mode'
+        - 'access inline editing'
+        # See the core navigation sidebar (the suite installs it): without
+        # this an editor has no site navigation and no visible user menu.
+        # Denied links are filtered out, so the sidebar shows only what the
+        # rest of this list allows.
+        - 'access navigation'
+        # Promote block types onto the palette dial (daedalus_layout).
+        - 'promote daedalus layout blocks'
+        # The Edit tool's FORM path for a block inside a layout (a widget
+        # that edits in the sidebar, e.g. an autocomplete on the image
+        # block's fallback tier) posts to daedalus_edit.block_form, a
+        # route gated by core's _layout_builder_access, which demands one
+        # of core's Layout Builder configure permissions on top of entity
+        # update access. These are the bundle-scoped, editor-grade ones
+        # (only on entities the user can already edit), one per
+        # layout-enabled bundle. The form itself is core's InlineBlock
+        # form, which renders the block's fields only to a user holding
+        # 'create and edit custom blocks' (layout_builder's site-wide
+        # inline-block permission). The rest of the page builder gates
+        # the same edit on entity update access plus the per-bundle
+        # block_content permissions above (daedalus_blueprint_api.mutate),
+        # so this is a second access grammar for one capability; the
+        # cleaner fix is for that route and form to adopt the spine's
+        # rule, after which these three lines go.
+        - 'configure editable page node layout overrides'
+        - 'configure editable layout_block block_content layout overrides'
+        - 'create and edit custom blocks'
+        # Save an element's styles as a variant, and push styles back into
+        # a variant. Update stays in despite its site-wide reach: pushing
+        # styles into a variant is an editing gesture, not configuration.
+        - 'create variants'
+        - 'update variants'
+        # Mint a palette swatch and push a color back into one: the same
+        # editing-gesture reasoning as variants (the swatch mint/edit-in-
+        # place surfaces ride the inspector sidebar).
+        - 'create swatches'
+        - 'update swatches'
+        # Mint an animation (named keyframes) and edit its steps in place:
+        # the same editing-gesture reasoning as swatches (the Materials
+        # Animations cards ride the inspector sidebar).
+        - 'create animations'
+        - 'update animations'
+        # The format Daedalus content stamps. Without it CKEditor
+        # silently degrades to a plain textarea; only a non-admin ever
+        # sees that (admin bypasses format access).
+        - 'use text format daedalus_edit_formatted_text'
+        # The shipped bundles, create/edit/delete. 'edit any' rather than
+        # 'edit own': the suite's shipped entities (the front page, the
+        # header and footer layout blocks) are not authored by the editor.
+        - 'create page content'
+        - 'edit any page content'
+        - 'delete any page content'
+        - 'create text block content'
+        - 'edit any text block content'
+        - 'delete any text block content'
+        - 'create formatted_text block content'
+        - 'edit any formatted_text block content'
+        - 'delete any formatted_text block content'
+        - 'create image block content'
+        - 'edit any image block content'
+        - 'delete any image block content'
+        - 'create layout_block block content'
+        - 'edit any layout_block block content'
+        - 'delete any layout_block block content'
+        # The vector (SVG) media lane (daedalus_media_vector_type). SVG
+        # upload is deliberately restricted to trusted roles: an SVG is an
+        # active document (script-capable, like HTML), so upload rights are
+        # one layer of the suite's layered SVG security (with upload-time
+        # sanitizing and inert rendering). 'own' rather than 'any': vector
+        # media is editor-authored, unlike the shipped bundles above.
+        - 'create vector_image media'
+        - 'edit own vector_image media'
+        - 'delete own vector_image media'
+    # An empty-profile install (drush si daedalus) creates the anonymous
+    # and authenticated roles with no permissions at all; without these a
+    # fresh site serves 403 to every visitor and renders images for no
+    # one. The standard profile ships the same baseline.
+    user.role.anonymous:
+      grantPermissions:
+        - 'access content'
+        - 'view media'
+    user.role.authenticated:
+      grantPermissions:
+        - 'access content'
+        - 'view media'

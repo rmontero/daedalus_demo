@@ -1,0 +1,41 @@
+name: 'Daedalus AI: Anthropic'
+description: 'Adds the Anthropic (Claude) provider and the Claude-specific context formatting, and sets Anthropic as the default chat provider for the Daedalus AI assistant. Paste your Anthropic API key at /admin/config/system/keys (key id: anthropic).'
+type: 'Site'
+
+# Depends on the AI core ingredient, which installs the `ai` module and the
+# assistant this provider serves. Declaring it satisfies recipe validation (the
+# ai.settings config action below targets a module the core ingredient installs)
+# and lets this provider be applied on its own, not only via the umbrella.
+recipes:
+  - daedalus_ai
+
+install:
+  - ai_provider_anthropic
+  # Claude-specific prompt/context formatting for the page builder.
+  - daedalus_ai_anthropic
+  - daedalus_blueprint_ai_anthropic
+
+config:
+  strict: false
+  import:
+    ai_provider_anthropic: '*'
+    daedalus_ai_anthropic: '*'
+    daedalus_blueprint_ai_anthropic: '*'
+  actions:
+    # Point the provider at the (initially empty) Anthropic key.
+    ai_provider_anthropic.settings:
+      simpleConfigUpdate:
+        api_key: anthropic
+        # Native Messages-API prompt caching (ai_provider_anthropic >= 1.3.0).
+        prompt_cache_enabled: true
+        prompt_cache_ttl: '5m'
+    # Default the chat operations to Anthropic. The assistant leaves
+    # llm_provider empty, so it follows these defaults.
+    ai.settings:
+      simpleConfigUpdate:
+        default_providers.chat:
+          provider_id: anthropic
+          model_id: claude-opus-5
+        default_providers.chat_with_tools:
+          provider_id: anthropic
+          model_id: claude-opus-5

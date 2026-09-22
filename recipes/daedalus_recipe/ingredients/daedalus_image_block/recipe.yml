@@ -1,0 +1,33 @@
+name: 'Daedalus Image Block'
+description: 'Adds the image block type (media reference) for Daedalus pages.'
+type: 'Block type'
+
+recipes:
+  - daedalus_engine
+  - daedalus_media_image
+  # The image block's media reference field allows the Vector image bundle,
+  # so its shipped config depends on media.type.vector_image; without this
+  # a standalone apply fails config import on a site with no vector type.
+  # The role-less type ingredient: editor SVG permissions live centrally
+  # in daedalus_editor_roles, and composing recipes make their own
+  # grants.
+  - daedalus_media_vector_type
+  - daedalus_sample_values
+
+install:
+  - daedalus_edit_image_block
+
+config:
+  # Everything except the block type, which legitimately diverges once a
+  # site configures its own palette icon
+  # (block_content.type.*.third_party.daedalus_layout.icon is user-editable on the
+  # block type form).
+  strict:
+    - core.entity_form_display.block_content.image.default
+    - core.entity_view_display.block_content.image.default
+    - field.field.block_content.image.field_image
+    - field.field.block_content.image.field_image_url
+    - field.storage.block_content.field_image
+    - field.storage.block_content.field_image_url
+  import:
+    daedalus_edit_image_block: '*'

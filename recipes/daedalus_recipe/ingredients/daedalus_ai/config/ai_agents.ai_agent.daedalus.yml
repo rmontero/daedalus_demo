@@ -1,0 +1,90 @@
+langcode: en
+status: true
+dependencies: {}
+id: daedalus
+label: 'Daedalus AI'
+description: 'Page builder agent for the Daedalus: designs, builds, and edits pages through the entity blueprint tools, composing layout and styling in one motion.'
+system_prompt: |-
+  You are the Daedalus page builder assistant for this Drupal site: you design, build, and edit pages in place, working on the same rendered page the user is looking at.
+
+  THE LOOP:
+  - Skills first. A matching skill from the catalog is loaded via eb_skill before acting.
+  - The page language is the work surface. The current page rides every turn as its print; every change to it is ONE atomic page_edit batch, structure and styling in one motion (fragments carry style="" inline, conditions ride the style op); failed ops roll back together. A new page is ONE page_create document. Edits to what exists are targeted ops, never rebuilds, and never bare structure to style later.
+  - Pages speak the page language; everything else speaks JSON. Materials change only through the save_material / update_material / remove_material page ops. Config entities, skins and other non-page entities go through eb_create_entity/eb_edit blueprints, taught on demand by eb_read_schema.
+  - Save discipline. page_create saves and publishes the new page itself (a page must exist before edits can stage). Every edit after that stays staged and invisible to visitors until saved; publishing is the user's call. Never pass save=true unless the user explicitly asks to save or publish.
+
+  RULES:
+  - Do not echo raw tool output. On errors, explain the problem and suggest a fix using the error hint.
+secured_system_prompt: '[ai_agent:agent_instructions]'
+tools:
+  'daedalus_blueprint:list_bundles': true
+  'daedalus_blueprint:skill': true
+  'daedalus_blueprint:page_read': true
+  'daedalus_blueprint:page_edit': true
+  'daedalus_blueprint:page_create': true
+  'daedalus_blueprint:read_entity': true
+  'daedalus_blueprint:read_schema': true
+  'daedalus_blueprint:create_entity': true
+  'daedalus_blueprint:edit': true
+  'daedalus_stylish:explain_element_styles': true
+tool_settings:
+  'daedalus_blueprint:list_bundles':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_blueprint:skill':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_blueprint:page_read':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_blueprint:page_edit':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_blueprint:page_create':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_blueprint:read_entity':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_blueprint:read_schema':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_blueprint:create_entity':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_blueprint:edit':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+  'daedalus_stylish:explain_element_styles':
+    return_directly: 0
+    require_usage: 0
+    progress_message: ''
+    use_artifacts: 0
+orchestration_agent: false
+triage_agent: false
+max_loops: 30
+default_information_tools: ''
+tool_usage_limits: {}
+exclude_users_role: false
+masquerade_roles: {}
+structured_output_enabled: false
+structured_output_schema: ''
+hostname_filter_disabled: true

@@ -1,0 +1,17 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 42ed7027-6fba-4634-a304-84b4ab0957df
+  bundle: text
+  default_langcode: en
+default:
+  status:
+    - value: true
+  info:
+    - value: Text
+  reusable:
+    - value: false
+  revision_translation_affected:
+    - value: true
+  field_text_text:
+    - value: 'Pro tip: to edit things quickly, use tab to move through elements.'
