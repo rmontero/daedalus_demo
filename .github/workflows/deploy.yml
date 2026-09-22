@@ -1,0 +1,72 @@
+name: Build and deploy to Pantheon
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  PANTHEON_SITE: daedalus-e3
+  PANTHEON_ENV: dev
+  PANTHEON_SITE_UUID: 49e55169-efff-495a-9819-e70d9cb3f9a6
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Composer install (build smoke test)
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Sanity-check recipe files are present
+        run: |
+          test -f recipes/daedalus_recipe/recipe.yml
+          test -f recipes/daedalus_recipe/ai/recipe.yml
+
+  deploy:
+    needs: build-and-validate
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PANTHEON_SSH_KEY }}
+
+      - name: Trust Pantheon codeserver host key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p 2222 "codeserver.dev.${PANTHEON_SITE_UUID}.drush.in" >> ~/.ssh/known_hosts
+
+      - name: Push code to Pantheon
+        run: |
+          git remote add pantheon "ssh://codeserver.dev.${PANTHEON_SITE_UUID}@codeserver.dev.${PANTHEON_SITE_UUID}.drush.in:2222/~/repository.git"
+          # Pantheon's own repo history is unrelated to ours; GitHub main is
+          # the single source of truth, so always force-push to keep it synced.
+          git push pantheon HEAD:master --force
+
+      - name: Install Terminus
+        run: |
+          curl -O https://raw.githubusercontent.com/pantheon-systems/terminus-installer/master/builds/installer.phar
+          php installer.phar install
+          echo "$HOME/terminus/bin" >> "$GITHUB_PATH"
+
+      - name: Clear Pantheon environment cache
+        run: |
+          terminus auth:login --machine-token="${{ secrets.PANTHEON_MACHINE_TOKEN }}"
+          terminus env:clear-cache "${PANTHEON_SITE}.${PANTHEON_ENV}"
